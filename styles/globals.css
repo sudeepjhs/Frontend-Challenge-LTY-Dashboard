@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:is(.light body) {
+  background-color: #fbfbfb;
+}
+:is(.light aside) {
+  background-color: white;
+}

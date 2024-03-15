@@ -40,7 +40,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body className={clsx("min-h-screen antialiased", fontAeonik.className)}>
+      <body
+        className={clsx(
+          "min-h-screen antialiased",
+          fontAeonik.className
+        )}
+      >
         <Providers
           themeProps={{
             attribute: "class",
@@ -52,7 +57,7 @@ export default function RootLayout({
             <aside className="md:w-1/6 xs:w-1/4">
               <Sidebar />
             </aside>
-            <main className="container mx-auto max-w-7xl px-6 flex-grow">
+            <main className="mx-auto max-w-7xl flex-grow">
               <Navbar />
               {children}
             </main>
