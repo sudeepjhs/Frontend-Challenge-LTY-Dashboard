@@ -28,6 +28,9 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
+  width: "device-width",
+  height: "device-height",
+  initialScale: 1.0,
 };
 export default function RootLayout({
   children,

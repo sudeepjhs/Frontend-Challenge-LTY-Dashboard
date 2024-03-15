@@ -34,8 +34,8 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({
         as={NextLink}
         className={clsx(
           "py-3 flex hover:text-white w-full h-full",
-          !isActive && "text-black",
-          isActive && "text-white"
+          !isActive && "text-black dark:text-white",
+          isActive && "text-white font-medium"
         )}
       >
         <div className="w-1/4 flex flex-row-reverse px-2">{Icon}</div>
