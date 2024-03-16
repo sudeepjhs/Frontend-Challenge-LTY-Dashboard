@@ -11,6 +11,7 @@ import {
   Legend,
   ChartOptions,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(
   CategoryScale,
@@ -18,12 +19,16 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels
 );
 
 export const options: ChartOptions<"bar"> = {
   responsive: true,
   plugins: {
+    datalabels: {
+      display: false,
+    },
     title: {
       display: false,
     },
