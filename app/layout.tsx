@@ -53,11 +53,11 @@ export default function RootLayout({
             children: children,
           }}
         >
-          <div className="relative flex h-screen">
-            <aside className="md:w-1/6 xs:w-1/4">
+          <div className="relative flex">
+            <aside className="md:w-1/6 xs:w-1/4 max-w-xs">
               <Sidebar />
             </aside>
-            <main className="mx-auto max-w-7xl flex-grow">
+            <main className="mx-auto max-w-screen-2xl flex-grow">
               <Navbar />
               {children}
             </main>

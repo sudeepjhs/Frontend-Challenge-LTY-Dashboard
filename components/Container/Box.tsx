@@ -1,14 +1,12 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import { Card, CardProps } from "@nextui-org/react";
+import React from "react";
 
-interface BoxProps extends HTMLAttributes<HTMLDivElement> {
-  children?: ReactNode;
-}
 
-const Box: React.FC<BoxProps> = ({ children, className, ...rest }) => {
+const Box: React.FC<CardProps> = ({ children, className, ...rest }) => {
   return (
-    <div className={`rounded-md shadow-sm ${className}`} {...rest}>
+    <Card className={`rounded-md shadow-sm ${className}`} {...rest}>
       {children}
-    </div>
+    </Card>
   );
 };
 

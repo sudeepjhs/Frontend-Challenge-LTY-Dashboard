@@ -1,4 +1,3 @@
-"use client";
 import React, { HTMLAttributes, ReactNode } from "react";
 import { Link } from "@nextui-org/react";
 import Box from "../Container/Box";
@@ -46,21 +45,21 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({
 };
 
 export const Sidebar = () => {
-  const pathname = usePathname() || null;
+  // const pathname = usePathname() ;
   return (
-    <Box className="h-screen flex flex-col">
+    <Box className="h-full flex flex-col">
       {/* Sidebar content */}
       <div className="text-xl flex-shrink-0 text-center py-5 font-bold text-secondary tracking-wide">
         LYT
       </div>
       <ul className="flex flex-col gap-2 flex-grow">
-        {siteConfig.sidebarItems.map(({ label, href, Icon }) => {
+        {siteConfig.sidebarItems.map(({ label, href, Icon },i) => {
           return (
             <SidebarLink
               key={`${href}-${label}`}
               label={label}
               Icon={<Icon size={"20px"} />}
-              isActive={href === pathname}
+              isActive={i==0}   //{href === pathname}
               href={href}
             />
           );

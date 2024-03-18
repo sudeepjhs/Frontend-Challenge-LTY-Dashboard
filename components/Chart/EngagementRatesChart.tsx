@@ -39,7 +39,28 @@ export const options: ChartOptions<"bar"> = {
   scales: {
     y: {
       beginAtZero: true,
+      ticks: {
+        stepSize: 20,
+        font: {
+          family: "Aeonik",
+          size: 20
+        }
+      },
+      border: {
+        dash: [5, 5],
+      },
     },
+    x: {
+      grid: {
+        display: false
+      },
+      ticks: {
+        font: {
+          family: "Aeonik",
+          size: 20
+        }
+      }
+    }
   },
 };
 
@@ -53,6 +74,7 @@ function EngagementRatesChart() {
           {
             data: [35, 20, 65, 50, 95, 55, 80],
             backgroundColor: "rgba(15, 164, 74, .1)",
+
           },
         ],
       }}

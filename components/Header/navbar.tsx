@@ -36,11 +36,11 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar
-      maxWidth="xl"
+      maxWidth="2xl"
       position="sticky"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
+        <NavbarBrand className="gap-3 max-w-fit">
           <p>Metrics looking good, Snow!</p>
         </NavbarBrand>
       </NavbarContent>

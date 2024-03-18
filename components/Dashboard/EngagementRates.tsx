@@ -1,15 +1,15 @@
 "use client";
 import { Select, SelectItem } from "@nextui-org/react";
-import React from "react";
 import EngagementRatesChart from "../Chart/EngagementRatesChart";
+import Box from "../Container/Box";
 
 function EngagementRates() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <div className="flex justify-between">
-        <h2 className="text-lg">Engagement Rates</h2>
+        <h2 className="text-xl">Engagement Rates</h2>
         <Select
-          className="max-w-[100px]"
+          className="max-w-[100px] text-black dark:text-white"
           radius="sm"
           color="secondary"
           defaultSelectedKeys={["weekly"]}
@@ -26,9 +26,9 @@ function EngagementRates() {
           </SelectItem>
         </Select>
       </div>
-      <div className="max-w-full">
+      <Box className="p-4">
         <EngagementRatesChart />
-      </div>
+      </Box>
     </div>
   );
 }

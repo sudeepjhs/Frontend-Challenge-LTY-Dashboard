@@ -5,15 +5,16 @@ import {
   CardHeader,
   Link,
 } from "@nextui-org/react";
-import { GoArrowUpRight, GoArrowUp } from "react-icons/go";
-import { RiBarChartLine } from "react-icons/ri";
-import React, { HTMLAttributes } from "react";
 import NextLink from "next/link";
+import React, { HTMLAttributes } from "react";
+import { GoArrowUpRight } from "react-icons/go";
+import GrowthIndicator from "../Misc/GrowthIndicator";
+import { UimAnalytics } from "../icons";
 
 interface MetricCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   countInThousand: string | number;
-  lastPercentage: string | number;
+  lastPercentage: number;
 }
 
 const MetricCard: React.FC<MetricCardProps> = ({
@@ -24,21 +25,18 @@ const MetricCard: React.FC<MetricCardProps> = ({
   return (
     <Card className="max-w-[400px] flex-grow rounded-sm shadow-sm">
       <CardHeader className="flex justify-between">
-        <p className="text-content4 text-sm">{title}</p>
+        <p className="text-content4">{title}</p>
         <GoArrowUpRight className="text-base" />
       </CardHeader>
       <CardBody className="py-1">
-        <h6 className="font-medium text-3xl">{countInThousand}K</h6>
+        <h6 className="font-medium text-4xl">{countInThousand}K</h6>
       </CardBody>
       <CardFooter className="flex justify-between py-3">
-        <p className="flex gap-2 text-sm text-content4">
-          <span className="text-secondary flex items-center">
-            <GoArrowUp />
-            <span className="text-sm">{lastPercentage}%</span>
-          </span>
+        <p className="flex gap-2 text-content4">
+          <GrowthIndicator percentage={lastPercentage} />
           in the last 7 days
         </p>
-        <RiBarChartLine size={"20px"} className="text-secondary" />
+        <UimAnalytics width={38.25} height={20} className="text-secondary" />
       </CardFooter>
     </Card>
   );
@@ -48,16 +46,16 @@ const PerformanceMetrics = () => {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-between">
-        <h2 className="text-lg font-normal">Performance Metrics</h2>
+        <h2 className="text-2xl font-normal">Performance Metrics</h2>
         <Link
           as={NextLink}
           href="#"
-          className="text-secondary text-sm underline"
+          className="text-secondary underline"
         >
           Download Summary
         </Link>
       </div>
-      <div className="flex  gap-5">
+      <div className="flex gap-8">
         <MetricCard
           title="Followers"
           countInThousand={93.2}

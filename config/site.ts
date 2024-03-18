@@ -1,12 +1,11 @@
 export type SiteConfig = typeof siteConfig;
-import { LuBarChart2 } from "react-icons/lu";
-import { PiUsersThree } from "react-icons/pi";
-import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
 import {
-  MdOutlinePermMedia,
-  MdOutlineContactSupport,
-  MdDashboard,
-} from "react-icons/md";
+  FluentPeopleCommunity16Regular,
+  IcBaselineDashboard,
+  UimAnalytics,
+} from "@/components/icons";
+import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
+import { MdOutlineContactSupport, MdOutlinePermMedia } from "react-icons/md";
 
 export const siteConfig = {
   name: "LYT",
@@ -15,17 +14,17 @@ export const siteConfig = {
     {
       label: "Dashboard",
       href: "/",
-      Icon: MdDashboard,
+      Icon: IcBaselineDashboard,
     },
     {
       label: "Analytics",
       href: "/analytics",
-      Icon: LuBarChart2,
+      Icon: UimAnalytics,
     },
     {
       label: "Communities",
       href: "/communities",
-      Icon: PiUsersThree,
+      Icon: FluentPeopleCommunity16Regular,
     },
     {
       label: "Notifications",
