@@ -55,16 +55,16 @@ const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({ metricData }) =
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-normal">Performance Metrics</h2>
+        <h2 className="text-lg md:text-2xl font-normal">Performance Metrics</h2>
         <Link
           as={NextLink}
           href="#"
-          className="text-secondary underline"
+          className="text-secondary underline md:text-[16px] text-sm"
         >
           Download Summary
         </Link>
       </div>
-      <div className="flex gap-8">
+      <div className="flex justify-between gap-3 md:flex-row flex-col">
         {metricData.map((data, i) =>
           <MetricCard
             key={data.title + "_" + i}

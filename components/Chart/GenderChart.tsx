@@ -138,7 +138,7 @@ const GenderChart: React.FC<GenderChartProps> = ({ chartData }) => {
           <span className="ml-1 text-xs">Others</span>
         </div>
       </div>
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <div className="flex flex-col gap-3">
           <h6>Gender</h6>
           <div>

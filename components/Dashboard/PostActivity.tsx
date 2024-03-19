@@ -29,9 +29,9 @@ const PostActivityCard: React.FC<PostCardProps> = ({
   };
   return <Box className="px-4 py-2">
     <div className="flex justify-between text-xs items-center">
-      <div className="flex gap-3">
+      <div className="flex gap-3 items-center">
         <div className="w-9 h-9 bg-center bg-cover" style={style}></div>
-        <p className="max-w-44 w-44">
+        <p className="md:max-w-44 md:w-44 w-28">
           {content.slice(0, 50) + "..."}
         </p>
       </div>
@@ -55,7 +55,7 @@ const PostActivity: React.FC<PostActivityProps> = ({ activites }) => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="font-medium text-xl">Post Activity</h2>
-      <div className="flex flex-col gap-0.5">
+      <div className="flex flex-col gap-1 md:gap-0.5">
         {
           activites.map((act, i) =>
             <PostActivityCard

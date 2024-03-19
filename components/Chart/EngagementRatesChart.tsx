@@ -75,6 +75,8 @@ interface EngagementRatesChartProps {
 const EngagementRatesChart: React.FC<EngagementRatesChartProps> = ({ chartData }) => {
   return (
     <Bar
+      height={"auto"}
+      width={"auto"}
       options={options}
       data={{
         labels: Weekdays,

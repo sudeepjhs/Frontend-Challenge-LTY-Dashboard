@@ -47,7 +47,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({
 export const Sidebar = () => {
   // const pathname = usePathname() ;
   return (
-    <Box className="h-full flex flex-col">
+    <Box className="h-full flex flex-col min-h-screen">
       {/* Sidebar content */}
       <div className="text-xl flex-shrink-0 text-center py-5 font-bold text-secondary tracking-wide">
         LYT
