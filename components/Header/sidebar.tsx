@@ -38,7 +38,7 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({
         )}
       >
         <div className="w-1/4 flex flex-row-reverse px-2">{Icon}</div>
-        <div className="mx-1">{label}</div>
+        <div className="mx-1 text-xl">{label}</div>
       </Link>
     </li>
   );
@@ -58,7 +58,7 @@ export const Sidebar = () => {
             <SidebarLink
               key={`${href}-${label}`}
               label={label}
-              Icon={<Icon size={"20px"} />}
+              Icon={<Icon size={24} />}
               isActive={i==0}   //{href === pathname}
               href={href}
             />
@@ -67,9 +67,9 @@ export const Sidebar = () => {
       </ul>
       <div className="text-secondary flex flex-shrink-0 py-3 hover:bg-secondary hover:text-white">
         <div className="w-1/4 flex flex-row-reverse px-2">
-          <IoLogOutOutline size={"20px"} />
+          <IoLogOutOutline size={24} />
         </div>
-        <div className="mx-1 text-center">Log-out</div>
+        <div className="mx-1 text-center text-xl">Log-out</div>
       </div>
     </Box>
   );

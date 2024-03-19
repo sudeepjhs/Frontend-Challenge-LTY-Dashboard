@@ -1,14 +1,13 @@
-import "@/styles/globals.css";
-import { Metadata } from "next";
-import { siteConfig } from "@/config/site";
-import { fontAeonik } from "@/config/fonts";
-import { Providers } from "./providers";
 import { Navbar } from "@/components/Header/navbar";
 import { Sidebar } from "@/components/Header/sidebar";
+import { fontAeonik } from "@/config/fonts";
+import { siteConfig } from "@/config/site";
+import "@/styles/globals.css";
+import { Metadata } from "next";
+import { Providers } from "./providers";
 
-import { Link } from "@nextui-org/link";
-import type { Viewport } from "next";
 import clsx from "clsx";
+import type { Viewport } from "next";
 
 export const metadata: Metadata = {
   title: {
@@ -54,7 +53,7 @@ export default function RootLayout({
           }}
         >
           <div className="relative flex">
-            <aside className="md:w-1/6 xs:w-1/4 max-w-xs">
+            <aside className="md:w-1/6 xs:w-1/4 max-w-xs min-w-52">
               <Sidebar />
             </aside>
             <main className="mx-auto max-w-screen-2xl flex-grow">

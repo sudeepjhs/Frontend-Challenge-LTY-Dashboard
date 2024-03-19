@@ -2,8 +2,12 @@
 import { Select, SelectItem } from "@nextui-org/react";
 import EngagementRatesChart from "../Chart/EngagementRatesChart";
 import Box from "../Container/Box";
+import React from "react";
 
-function EngagementRates() {
+interface EngagementRatesProps {
+  rates?: number[]
+}
+const EngagementRates: React.FC<EngagementRatesProps> = ({ rates }) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between">
@@ -27,7 +31,7 @@ function EngagementRates() {
         </Select>
       </div>
       <Box className="p-4">
-        <EngagementRatesChart />
+        <EngagementRatesChart chartData={rates} />
       </Box>
     </div>
   );

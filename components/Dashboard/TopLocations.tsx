@@ -1,6 +1,8 @@
+import { LocationVisitorData } from '@/data/dashboardData'
+import { dummyLocationVistorData } from '@/data/dummy/dashboardDummyData'
+import { Button, Divider } from '@nextui-org/react'
 import React, { HTMLAttributes } from 'react'
 import Box from '../Container/Box'
-import { Button, Divider } from '@nextui-org/react'
 import GrowthIndicator from '../Misc/GrowthIndicator'
 
 interface LocationVisitorCardProps extends HTMLAttributes<HTMLDivElement> {
@@ -15,7 +17,7 @@ const LocationVisitorCard: React.FC<LocationVisitorCardProps> = ({ locationName,
             <div className='flex justify-between text-sm items-center py-1'>
                 <p>{locationName}</p>
                 <div className='flex flex-col'>
-                    <p>{NoOfVisitor}</p>
+                    <p>{NoOfVisitor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p> {/* To add commas to numbers representing thousands, lakhs, etc */}
                     <GrowthIndicator className='justify-end' percentage={percentage} iconSize={8} fontSize='text-[8px]' />
                 </div>
             </div>
@@ -24,7 +26,14 @@ const LocationVisitorCard: React.FC<LocationVisitorCardProps> = ({ locationName,
     )
 }
 
-function TopLocations() {
+interface VisitorsPerDayProps {
+    visitorsData?: LocationVisitorData[],
+}
+
+const TopLocations: React.FC<VisitorsPerDayProps> = ({ visitorsData }) => {
+
+    if (!visitorsData || !visitorsData.length) visitorsData = dummyLocationVistorData;
+
     return (
         <Box className='py-3 px-5'>
             <div className='flex flex-col gap-3'>
@@ -40,10 +49,9 @@ function TopLocations() {
                         </div>
                         <Divider />
                     </div>
-                    <LocationVisitorCard NoOfVisitor={"5,430"} locationName='Nigeria' percentage={2.2} />
-                    <LocationVisitorCard NoOfVisitor={"5,430"} locationName='Nigeria' percentage={2.2} />
-                    <LocationVisitorCard NoOfVisitor={"5,430"} locationName='Nigeria' percentage={2.2} />
-                    <LocationVisitorCard NoOfVisitor={"5,430"} locationName='Nigeria' percentage={2.2} />
+                    {visitorsData.map((data, i) =>
+                        <LocationVisitorCard key={data.location + "_" + i} NoOfVisitor={data.noOfVisitor} locationName={data.location} percentage={data.incPer} />
+                    )}
                 </div>
             </div>
         </Box>

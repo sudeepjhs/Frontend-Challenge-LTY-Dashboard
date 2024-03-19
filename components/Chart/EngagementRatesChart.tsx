@@ -1,17 +1,19 @@
 import { Weekdays } from "@/data/chart";
-import React from "react";
-import { Bar } from "react-chartjs-2";
+import { DummyEngagementData } from "@/data/dummy/chartDummyData";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  ChartOptions,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
-  ChartOptions,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import React from "react";
+import { Bar } from "react-chartjs-2";
+
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +25,8 @@ ChartJS.register(
   ChartDataLabels
 );
 
-export const options: ChartOptions<"bar"> = {
+// Define bar chart options
+const options: ChartOptions<"bar"> = {
   responsive: true,
   plugins: {
     datalabels: {
@@ -64,7 +67,12 @@ export const options: ChartOptions<"bar"> = {
   },
 };
 
-function EngagementRatesChart() {
+// Define EngagementRatesChartProps interface
+interface EngagementRatesChartProps {
+  chartData?: number[]
+}
+
+const EngagementRatesChart: React.FC<EngagementRatesChartProps> = ({ chartData }) => {
   return (
     <Bar
       options={options}
@@ -72,7 +80,7 @@ function EngagementRatesChart() {
         labels: Weekdays,
         datasets: [
           {
-            data: [35, 20, 65, 50, 95, 55, 80],
+            data: chartData || DummyEngagementData, // dummay data if chartData is null
             backgroundColor: "rgba(15, 164, 74, .1)",
 
           },

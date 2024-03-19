@@ -1,3 +1,4 @@
+import { PerformanceMetricData } from "@/data/dashboardData";
 import {
   Card,
   CardBody,
@@ -10,6 +11,7 @@ import React, { HTMLAttributes } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import GrowthIndicator from "../Misc/GrowthIndicator";
 import { UimAnalytics } from "../icons";
+import { dummyPerformanceMetricData } from "@/data/dummy/dashboardDummyData";
 
 interface MetricCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -42,7 +44,14 @@ const MetricCard: React.FC<MetricCardProps> = ({
   );
 };
 
-const PerformanceMetrics = () => {
+interface PerformanceMetricsProps {
+  metricData?: PerformanceMetricData[]
+}
+
+const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({ metricData }) => {
+
+  if (!metricData || metricData.length <= 0) metricData = dummyPerformanceMetricData;
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-between">
@@ -56,19 +65,17 @@ const PerformanceMetrics = () => {
         </Link>
       </div>
       <div className="flex gap-8">
-        <MetricCard
-          title="Followers"
-          countInThousand={93.2}
-          lastPercentage={0.8}
-        />
-        <MetricCard title="Likes" countInThousand={400} lastPercentage={1.21} />
-        <MetricCard
-          title="Comments"
-          countInThousand={289.1}
-          lastPercentage={2.7}
-        />
+        {metricData.map((data, i) =>
+          <MetricCard
+            key={data.title + "_" + i}
+            title={data.title}
+            countInThousand={data.record / 1000}
+            lastPercentage={data.incPerc}
+          />
+        )}
       </div>
     </div>
+
   );
 };
 

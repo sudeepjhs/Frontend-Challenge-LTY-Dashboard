@@ -1,17 +1,19 @@
 "use client";
-import React from "react";
-import { Bar, Doughnut } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
   ArcElement,
+  BarElement,
   CategoryScale,
-  Tooltip,
+  Chart as ChartJS,
+  ChartOptions,
   Legend,
   LinearScale,
-  BarElement,
-  ChartOptions,
+  Tooltip,
 } from "chart.js";
+import React from "react";
+import { Bar, Doughnut } from "react-chartjs-2";
 
+import { Gender, GenderAge } from "@/data/chart";
+import { DummyGenderData } from "@/data/dummy/chartDummyData";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(
@@ -24,45 +26,46 @@ ChartJS.register(
   BarElement
 );
 
+// Define doughnut chart options
 const doughnutOptions: ChartOptions<"doughnut"> = {
-  responsive: true,
-  maintainAspectRatio: false,
-  cutout: 50,
+  responsive: true, // Make the chart responsive
+  maintainAspectRatio: false, // Do not maintain aspect ratio
+  cutout: 50, // Cutout size of the doughnut
   layout: {
-    padding: 10,
+    padding: 10, // Padding around the chart
   },
+  // rotation: 45,
   plugins: {
     legend: {
-      display: false,
+      display: false, // Hide the legend
     },
     datalabels: {
-      anchor: "end",
-      offset: 0,
-      color: "black",
-      align: "end",
+      anchor: "end", // Anchor position of datalabels
+      offset: -2, // Offset of datalabels
+      color: "black", // Color of datalabels
+      align: "end", // Alignment of datalabels
       font: {
-        family: "Aeonik",
-        size: 12,
-        weight: "bold"
-      },
-      formatter: (value, ctx) => {
-        return value + "%";
+        family: "Aeonik", // Font family of datalabels
+        size: 12, // Font size of datalabels
+        weight: "bold" // Font weight of datalabels
       },
     },
   },
 };
 
+// Define bar chart options
 const barOptions: ChartOptions<"bar"> = {
-  responsive: true,
+  responsive: true, // Make the chart responsive
+  maintainAspectRatio: false, // Do not maintain aspect ratio
   layout: {
     padding: {
-      right: 8,
-      y: 0,
+      right: 8, // Padding on the right side
+      y: 0, // Padding on the y-axis
     },
   },
   plugins: {
     legend: {
-      display: false,
+      display: false, // Hide the legend
     },
     datalabels: {
       display: (ctx) => {
@@ -70,37 +73,48 @@ const barOptions: ChartOptions<"bar"> = {
           ctx.datasetIndex === 0 ||
           ctx.datasetIndex === ctx.chart.data.datasets.length - 1
         )
-          return true;
+          return true; // Show datalabels for the first and last dataset
         return false;
       },
       font: {
-        family: "Aeonik",
-        size: 12,
-        weight: "bold"
+        family: "Aeonik", // Font family of datalabels
+        size: 12, // Font size of datalabels
+        weight: "bold" // Font weight of datalabels
       }
     },
   },
-  indexAxis: "y",
+  indexAxis: "y", // Set the index axis to the y-axis
   scales: {
     x: {
-      stacked: true,
-      display: false,
+      stacked: true, // Stack the x-axis
+      display: false, // Hide the x-axis
     },
     y: {
-      stacked: true,
-      display: false,
+      stacked: true, // Stack the y-axis
+      display: false, // Hide the y-axis
     },
   },
 };
 
-function GenderChart() {
-  const maleData = [20, 30, 40, 50];
-  const femaleData = [10, 20, 30, 40];
-  const otherData = [5, 10, 15, 20];
 
-  const totalCounts = maleData
-    .map((count, index) => count + femaleData[index] + otherData[index])
-    .reduce((a, b) => a + b, 0);
+// Define GenderChartProps interface
+interface GenderChartProps {
+  chartData?: Gender
+}
+
+
+const GenderChart: React.FC<GenderChartProps> = ({ chartData }) => {
+
+  // If chartData is not provided, use the dummy data
+  if (!chartData) chartData = DummyGenderData
+
+  // Calculate the sum of male, female, and other data
+  const sumOfMaleData = chartData.male.reduce((acc, curr) => acc + curr, 0)
+  const sumOfFemaleData = chartData.female.reduce((acc, curr) => acc + curr, 0)
+  const sumOfOtherData = chartData.others.reduce((acc, curr) => acc + curr, 0)
+
+  // Calculate the total counts
+  const totalCounts = sumOfMaleData + sumOfFemaleData + sumOfOtherData
 
   return (
     <div className="flex flex-col gap-5">
@@ -134,8 +148,13 @@ function GenderChart() {
                 labels: ["Male", "Female", "Other"],
                 datasets: [
                   {
-                    data: [35, 55, 15],
+                    data: [sumOfMaleData, sumOfFemaleData, sumOfOtherData],
                     backgroundColor: ["#283350", "#0FA44A", "#FFF854"],
+                    datalabels: {
+                      formatter: (value, ctx) => {
+                        return Math.round((value / totalCounts) * 100) + "%"; // Format datalabels as percentage
+                      },
+                    }
                   },
                 ],
               }}
@@ -148,11 +167,11 @@ function GenderChart() {
             <Bar
               options={barOptions}
               data={{
-                labels: ["16-25", "25-35", "35-55", "55+"],
+                labels: GenderAge,
                 datasets: [
                   {
                     label: "Male",
-                    data: maleData,
+                    data: chartData.male,
                     backgroundColor: "#283350",
                     datalabels: {
                       color: "white",
@@ -165,17 +184,18 @@ function GenderChart() {
                   },
                   {
                     label: "Female",
-                    data: femaleData,
+                    data: chartData.female,
                     backgroundColor: "#0FA44A",
                   },
                   {
                     label: "Others",
-                    data: otherData,
+                    data: chartData.others,
                     backgroundColor: "#FFF854",
                     datalabels: {
                       color: "black",
                       anchor: "end",
                       align: "end",
+                      offset: 0,
                       formatter: (value, ctx) => {
                         const dataIndex = ctx.dataIndex;
                         const sum = ctx.chart.data.datasets.reduce(
