@@ -25,7 +25,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
   lastPercentage,
 }) => {
   return (
-    <Card className="max-w-[400px] flex-grow rounded-sm shadow-sm">
+    <Card className="max-w-[600px] flex-grow rounded-sm shadow-sm">
       <CardHeader className="flex justify-between">
         <p className="text-content4">{title}</p>
         <GoArrowUpRight className="text-base" />
@@ -64,7 +64,7 @@ const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({ metricData }) =
           Download Summary
         </Link>
       </div>
-      <div className="flex justify-between gap-3 md:flex-row flex-col">
+      <div className="flex justify-between gap-3 md:gap-10 md:flex-row flex-col">
         {metricData.map((data, i) =>
           <MetricCard
             key={data.title + "_" + i}
