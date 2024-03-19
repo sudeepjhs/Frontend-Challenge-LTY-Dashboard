@@ -13,7 +13,7 @@ export default function Home() {
       <div className="flex gap-5 flex-col-reverse md:flex-row">
         <div className="md:w-6/12 flex flex-col gap-6">
           <EngagementRates rates={createEngagementRateData()} />
-          <PostActivity activites={createPostActivityData(4)} />
+          <PostActivity activites={createPostActivityData(3)} />
         </div>
         <div className="md:w-6/12 flex flex-col gap-1">
           <AudienceDemography genderData={createGenderChart()} />

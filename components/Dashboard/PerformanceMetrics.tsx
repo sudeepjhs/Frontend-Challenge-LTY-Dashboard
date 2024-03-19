@@ -64,7 +64,7 @@ const PerformanceMetrics: React.FC<PerformanceMetricsProps> = ({ metricData }) =
           Download Summary
         </Link>
       </div>
-      <div className="flex justify-between gap-3 md:gap-10 md:flex-row flex-col">
+      <div className="flex justify-center sm:justify-between gap-3 md:gap-10 md:flex-row flex-col">
         {metricData.map((data, i) =>
           <MetricCard
             key={data.title + "_" + i}

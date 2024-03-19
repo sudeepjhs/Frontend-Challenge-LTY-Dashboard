@@ -15,7 +15,9 @@ import {
   PopoverTrigger,
   User,
 } from "@nextui-org/react";
-import { IoSearchOutline } from "react-icons/io5";
+import { IoLogOutOutline, IoSearchOutline } from "react-icons/io5";
+import { siteConfig } from "@/config/site";
+import { SidebarLink } from "./sidebar";
 
 export const Navbar = () => {
   const searchInput = (
@@ -78,10 +80,27 @@ export const Navbar = () => {
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
-
       <NavbarMenu>
         {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2"></div>
+        <ul className="mx-4 mt-2 flex flex-col gap-2">
+          {siteConfig.sidebarItems.map(({ label, href, Icon }, i) => {
+            return (
+              <SidebarLink
+                key={`${href}-${label}`}
+                label={label}
+                Icon={<Icon />}
+                isActive={i == 0}   //{href === pathname}
+                href={href}
+              />
+            );
+          })}
+        </ul>
+        <div className="text-secondary flex flex-shrink-0 py-3 hover:bg-secondary hover:text-white">
+          <div className="w-1/4 flex flex-row-reverse px-2">
+            <IoLogOutOutline size={24} />
+          </div>
+          <div className="mx-1 text-center text-xl">Log-out</div>
+        </div>
       </NavbarMenu>
     </NextUINavbar>
   );

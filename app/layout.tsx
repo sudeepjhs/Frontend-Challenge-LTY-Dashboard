@@ -53,7 +53,7 @@ export default function RootLayout({
           }}
         >
           <div className="relative flex">
-            <aside className="md:w-1/6 xs:w-1/4 max-w-xs min-w-52">
+            <aside className="md:w-1/6 xs:w-1/4 max-w-xs min-w-52 hidden sm:block">
               <Sidebar />
             </aside>
             <main className="mx-auto max-w-screen-2xl flex-grow">

@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { IoLogOutOutline } from "react-icons/io5";
 
-interface SidebarLinkProps extends HTMLAttributes<HTMLUListElement> {
+export interface SidebarLinkProps extends HTMLAttributes<HTMLUListElement> {
   children?: ReactNode;
   label: string | number;
   Icon: JSX.Element;
@@ -15,7 +15,7 @@ interface SidebarLinkProps extends HTMLAttributes<HTMLUListElement> {
   isActive: boolean;
 }
 
-const SidebarLink: React.FC<SidebarLinkProps> = ({
+export const SidebarLink: React.FC<SidebarLinkProps> = ({
   label,
   Icon,
   isActive,
@@ -53,13 +53,13 @@ export const Sidebar = () => {
         LYT
       </div>
       <ul className="flex flex-col gap-2 flex-grow">
-        {siteConfig.sidebarItems.map(({ label, href, Icon },i) => {
+        {siteConfig.sidebarItems.map(({ label, href, Icon }, i) => {
           return (
             <SidebarLink
               key={`${href}-${label}`}
               label={label}
               Icon={<Icon size={24} />}
-              isActive={i==0}   //{href === pathname}
+              isActive={i == 0}   //{href === pathname}
               href={href}
             />
           );

@@ -18,7 +18,7 @@ const LocationVisitorCard: React.FC<LocationVisitorCardProps> = ({ locationName,
                 <p>{locationName}</p>
                 <div className='flex flex-col'>
                     <p>{NoOfVisitor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p> {/* To add commas to numbers representing thousands, lakhs, etc */}
-                    <GrowthIndicator className='justify-end' percentage={percentage} iconSize={8} fontSize='text-[8px]' />
+                    <GrowthIndicator className='justify-end' percentage={percentage} iconSize={8} fontSize='text-[10px]' />
                 </div>
             </div>
             <Divider />
