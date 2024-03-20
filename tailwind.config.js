@@ -24,7 +24,9 @@ module.exports = {
         },
         dark: {
           layout: {},
-          colors: {},
+          colors: {
+            secondary: "#0FA44A",
+          },
         },
       },
     }),
