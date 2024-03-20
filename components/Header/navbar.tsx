@@ -24,23 +24,23 @@ export const Navbar = () => {
     <Input
       aria-label="Search"
       classNames={{
-        inputWrapper: "bg-default-100 rounded-sm",
+        inputWrapper: "rounded-sm ",
         input: "text-sm",
+      }}
+      style={{
+        minWidth: "20rem",
       }}
       labelPlacement="outside"
       placeholder="Search"
       startContent={
-        <IoSearchOutline className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+        <IoSearchOutline className=" text-base text-default-400 pointer-events-none flex-shrink-0" />
       }
       type="search"
     />
   );
 
   return (
-    <NextUINavbar
-      maxWidth="2xl"
-      position="sticky"
-    >
+    <NextUINavbar maxWidth="2xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <p>Metrics looking good, Snow!</p>
@@ -89,7 +89,7 @@ export const Navbar = () => {
                 key={`${href}-${label}`}
                 label={label}
                 Icon={<Icon />}
-                isActive={i == 0}   //{href === pathname}
+                isActive={i == 0} //{href === pathname}
                 href={href}
               />
             );
