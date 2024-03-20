@@ -1,4 +1,4 @@
-# README.md for Frontend-Challenge-LTY-Dashboard Repository
+# Frontend-Challenge-LTY-Dashboard Repository
 
 ## Introduction:
 This repository serves as a submission for the Frontend Challenge provided by [Tublian](https://github.com/Tublian), showcasing the skills of the developer. The project is built using modern technologies and tools.
