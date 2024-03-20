@@ -9,12 +9,13 @@ import {
   LinearScale,
   Tooltip,
 } from "chart.js";
-import React from "react";
+import React, { memo, useMemo } from "react";
 import { Bar, Doughnut } from "react-chartjs-2";
 
 import { Gender, GenderAge } from "@/data/chart";
 import { DummyGenderData } from "@/data/dummy/chartDummyData";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { useTheme } from "next-themes";
 
 ChartJS.register(
   ArcElement,
@@ -26,95 +27,101 @@ ChartJS.register(
   BarElement
 );
 
-// Define doughnut chart options
-const doughnutOptions: ChartOptions<"doughnut"> = {
-  responsive: true, // Make the chart responsive
-  maintainAspectRatio: false, // Do not maintain aspect ratio
-  cutout: 50, // Cutout size of the doughnut
-  layout: {
-    padding: 10, // Padding around the chart
-  },
-  // rotation: 45,
-  plugins: {
-    legend: {
-      display: false, // Hide the legend
-    },
-    datalabels: {
-      anchor: "end", // Anchor position of datalabels
-      offset: -2, // Offset of datalabels
-      color: "black", // Color of datalabels
-      align: "end", // Alignment of datalabels
-      font: {
-        family: "Aeonik", // Font family of datalabels
-        size: 12, // Font size of datalabels
-        weight: "bold" // Font weight of datalabels
-      },
-    },
-  },
-};
-
-// Define bar chart options
-const barOptions: ChartOptions<"bar"> = {
-  responsive: true, // Make the chart responsive
-  maintainAspectRatio: false, // Do not maintain aspect ratio
-  layout: {
-    padding: {
-      right: 8, // Padding on the right side
-      y: 0, // Padding on the y-axis
-    },
-  },
-  plugins: {
-    legend: {
-      display: false, // Hide the legend
-    },
-    datalabels: {
-      display: (ctx) => {
-        if (
-          ctx.datasetIndex === 0 ||
-          ctx.datasetIndex === ctx.chart.data.datasets.length - 1
-        )
-          return true; // Show datalabels for the first and last dataset
-        return false;
-      },
-      font: {
-        family: "Aeonik", // Font family of datalabels
-        size: 12, // Font size of datalabels
-        weight: "bold" // Font weight of datalabels
-      }
-    },
-  },
-  indexAxis: "y", // Set the index axis to the y-axis
-  scales: {
-    x: {
-      stacked: true, // Stack the x-axis
-      display: false, // Hide the x-axis
-    },
-    y: {
-      stacked: true, // Stack the y-axis
-      display: false, // Hide the y-axis
-    },
-  },
-};
-
-
 // Define GenderChartProps interface
 interface GenderChartProps {
-  chartData?: Gender
+  chartData?: Gender;
 }
 
-
 const GenderChart: React.FC<GenderChartProps> = ({ chartData }) => {
+  const theme = useTheme();
+
+  // Define doughnut chart options
+  const doughnutOptions: ChartOptions<"doughnut"> = useMemo(
+    () => ({
+      responsive: true, // Make the chart responsive
+      maintainAspectRatio: false, // Do not maintain aspect ratio
+      cutout: 50, // Cutout size of the doughnut
+      layout: {
+        padding: 10, // Padding around the chart
+      },
+      // rotation: 45,
+      plugins: {
+        legend: {
+          display: false, // Hide the legend
+        },
+        datalabels: {
+          anchor: "end", // Anchor position of datalabels
+          offset: -2, // Offset of datalabels
+          color: theme.theme === "light" ? "black" : "white", // Color of datalabels
+          align: "end", // Alignment of datalabels
+          font: {
+            family: "Aeonik", // Font family of datalabels
+            size: 12, // Font size of datalabels
+            weight: "bold", // Font weight of datalabels
+          },
+        },
+      },
+    }),
+    [theme]
+  );
+
+  // Define bar chart options
+  const barOptions: ChartOptions<"bar"> = useMemo(
+    () => ({
+      responsive: true, // Make the chart responsive
+      maintainAspectRatio: false, // Do not maintain aspect ratio
+      layout: {
+        padding: {
+          right: 8, // Padding on the right side
+          y: 0, // Padding on the y-axis
+        },
+      },
+      plugins: {
+        legend: {
+          display: false, // Hide the legend
+        },
+        datalabels: {
+          display: (ctx) => {
+            if (
+              ctx.datasetIndex === 0 ||
+              ctx.datasetIndex === ctx.chart.data.datasets.length - 1
+            )
+              return true; // Show datalabels for the first and last dataset
+            return false;
+          },
+          font: {
+            family: "Aeonik", // Font family of datalabels
+            size: 12, // Font size of datalabels
+            weight: "bold", // Font weight of datalabels
+          },
+          color: theme.theme === "light" ? "black" : "white", // Color of datalabels
+        },
+      },
+      indexAxis: "y", // Set the index axis to the y-axis
+      scales: {
+        x: {
+          stacked: true, // Stack the x-axis
+          display: false, // Hide the x-axis
+        },
+        y: {
+          stacked: true, // Stack the y-axis
+          display: false, // Hide the y-axis
+        },
+      },
+    }),
+    [theme]
+  );
 
   // If chartData is not provided, use the dummy data
-  if (!chartData) chartData = DummyGenderData
+  if (!chartData) chartData = DummyGenderData;
 
   // Calculate the sum of male, female, and other data
-  const sumOfMaleData = chartData.male.reduce((acc, curr) => acc + curr, 0)
-  const sumOfFemaleData = chartData.female.reduce((acc, curr) => acc + curr, 0)
-  const sumOfOtherData = chartData.others.reduce((acc, curr) => acc + curr, 0)
+  const sumOfMaleData = chartData.male.reduce((acc, curr) => acc + curr, 0);
+  const sumOfFemaleData = chartData.female.reduce((acc, curr) => acc + curr, 0);
+  const sumOfOtherData = chartData.others.reduce((acc, curr) => acc + curr, 0);
 
   // Calculate the total counts
-  const totalCounts = sumOfMaleData + sumOfFemaleData + sumOfOtherData
+  const totalCounts = sumOfMaleData + sumOfFemaleData + sumOfOtherData;
 
   return (
     <div className="flex flex-col gap-5">
@@ -154,7 +161,7 @@ const GenderChart: React.FC<GenderChartProps> = ({ chartData }) => {
                       formatter: (value, ctx) => {
                         return Math.round((value / totalCounts) * 100) + "%"; // Format datalabels as percentage
                       },
-                    }
+                    },
                   },
                 ],
               }}
@@ -192,7 +199,6 @@ const GenderChart: React.FC<GenderChartProps> = ({ chartData }) => {
                     data: chartData.others,
                     backgroundColor: "#FFF854",
                     datalabels: {
-                      color: "black",
                       anchor: "end",
                       align: "end",
                       offset: 0,
@@ -218,6 +224,6 @@ const GenderChart: React.FC<GenderChartProps> = ({ chartData }) => {
       </div>
     </div>
   );
-}
+};
 
-export default GenderChart;
+export default memo(GenderChart);
