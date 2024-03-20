@@ -3,6 +3,17 @@
 ## Introduction:
 This repository serves as a submission for the Frontend Challenge provided by [Tublian](https://github.com/Tublian), showcasing the skills of the developer. The project is built using modern technologies and tools.
 
+## Dark Mode Support
+This project incorporates built-in support for dark mode, making it accessible and comfortable for users who prefer darker color schemes. Dark mode not only provides a visually appealing alternative to the traditional light interface but also helps in reducing eye strain during night-time use.
+
+### Enabling Dark Mode
+To switch between light and dark themes:
+1. Navigate to the dashboard's navbar.
+2. Click on the user icon to open the user settings dropdown.
+3. Select the "Change Theme" button. This will toggle between light and dark mode settings.
+
+The `next-themes` plugin is utilized to seamlessly manage theme switching, ensuring that your preference is preserved across sessions.
+
 ## Technologies Used:
 - **Next.js v13**: A popular React-based framework for server-side rendered applications.
 - **NextUI v2**: A modern UI library for React, built on top of the emotion engine and inspired by Material Design.
