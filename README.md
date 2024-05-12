@@ -35,7 +35,7 @@ The `next-themes` plugin is utilized to seamlessly manage theme switching, ensur
 
 To clone and set up the project locally:
 
-1. Clone the repository: `git clone https://github.com/your-username/Frontend-Challenge-LTY-Dashboard.git`
+1. Clone the repository: `git clone https://github.com/sudeepjhs/Frontend-Challenge-LTY-Dashboard.git`
 2. Navigate to the project directory: `cd Frontend-Challenge-LTY-Dashboard`
 3. Install dependencies: `npm install`
 
